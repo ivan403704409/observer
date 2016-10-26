@@ -10,7 +10,7 @@ Dependency free publish/subscribe for JavaScript
 // api:
 // subscribe(name, [callback])
 // subscribeOnce(name, [callback])
-// unscribe(name, [functionName])
+// unsubscribe(name, [functionName])
 // publish(name)
 
 // use in global
@@ -20,11 +20,11 @@ window.observer.subscribeOnce('fetchData', data => console.log('trigger once',da
 window.observer.publish('fetchData', { name: 'xxx', age: '20' })
 window.observer.publish('fetchData', { name: 'xxx', age: '30' })
 
-// unscribe
-window.observer.unscribe('fetchData', fnName)
+// unsubscribe
+window.observer.unsubscribe('fetchData', fnName)
 
-// unscribe all
-window.observer.unscribe('fetchData')
+// unsubscribe all
+window.observer.unsubscribe('fetchData')
 
 
 // use in local:
