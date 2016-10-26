@@ -59,9 +59,11 @@ export default class Observer {
 			delete o[eventName]
 			return
 		}
+		let evs = o[eventName]
+		if(!evs)return
 		let index = -1
-		if( (index=o[eventName].indexOf(fn)) !== -1 ){
-			o.splice(index, 1)
+		if( (index=evs.indexOf(fn)) !== -1 ){
+			evs.splice(index, 1)
 		}
 	}
 
