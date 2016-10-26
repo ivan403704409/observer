@@ -78,7 +78,7 @@ export default class Observer {
 				fn(...args)
 				if(fn.__isOnce){
 					let index = evs.indexOf(fn)
-					evs.splice(index)
+					evs.splice(index, 1)
 				}
 			})
 		}
