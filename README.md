@@ -35,4 +35,4 @@ observer.subscribe === observer.on
 observer.subscribeOnce === observer.once
 observer.unsubscribe === observer.off
 observer.publish === observer.trigger
-```javascript
+```
