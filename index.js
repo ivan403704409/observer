@@ -1,25 +1,4 @@
-/**
- * 自定义事件（订阅/广播）
- * demo: 
- * use in global:
-  	window.observer = new Observer()
-  	window.observer.on('fetchData', data => console.log(data))
-  	window.observer.once('fetchData', data => console.log('只触发一次',data))
-  	window.observer.trigger('fetchData', { name: 'xxx', age: '20' })
- 
- * use in local:
-  	localObserver = new Observer()
-	localObserver.on('fetchData', data => console.log(data))
-	localObserver.once('fetchData', data => console.log('只触发一次',data))
-	localObserver.trigger('fetchData', { name: 'xxx', age: '20' })
-
- * alais: 
-	observer.subscribe === observer.on
-	observer.subscribeOnce === observer.once
-	observer.unsubscribe === observer.off
-	observer.publish === observer.trigger
- */
-export default class Observer {
+class Observer {
 	constructor() {
 		this._repository = {}
 	}
@@ -31,6 +10,7 @@ export default class Observer {
 	 * @return {[type]}             [description]
 	 */
 	on(eventName, fn){
+		if(typeof fn!=='function')return
 		let o = this._repository
 		if( !o[eventName] )o[eventName] = []
 		o[eventName].push(fn)
@@ -43,6 +23,7 @@ export default class Observer {
 	 * @return {[type]}             [description]
 	 */
 	once(eventName, fn){
+		if(typeof fn!=='function')return
 		fn.__isOnce = true
 		this.on(eventName, fn)
 	}
@@ -54,6 +35,7 @@ export default class Observer {
 	 * @return {[type]}             [description]
 	 */
 	off(eventName, fn){
+		if(typeof fn!=='function')return
 		let o = this._repository
 		if(arguments.length===1){
 			delete o[eventName]
