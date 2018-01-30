@@ -74,18 +74,19 @@ export default class Observer {
 	 * 触发事件(广播)
 	 * @return {[type]} [description]
 	 */
-	trigger(){
-		let o = this._repository
-		let [eventName, ...args] = arguments
-		let evs = o[eventName]
-		if(evs){
-			evs.forEach(function(fn){
-				fn(...args)
-				if(fn.__isOnce){
-					let index = evs.indexOf(fn)
-					evs.splice(index, 1)
-				}
-			})
+	emit() {
+		let o = this._repository;
+		let [eventName, ...args] = arguments;
+		let evs = o[eventName];
+		if (evs) {
+		    let rest = [];
+		    evs.forEach(function(fn) {
+			fn(...args);
+			if (!fn.__isOnce) {
+			    rest.push(fn);
+			}
+		    });
+		    o[eventName] = rest;
 		}
 	}
 
@@ -93,4 +94,4 @@ export default class Observer {
 Observer.prototype.subscribe = Observer.prototype.on
 Observer.prototype.subscribeOnce = Observer.prototype.once
 Observer.prototype.unsubscribe = Observer.prototype.off
-Observer.prototype.publish = Observer.prototype.trigger
+Observer.prototype.publish = Observer.prototype.emit
